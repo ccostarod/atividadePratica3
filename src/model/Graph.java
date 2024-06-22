@@ -1,4 +1,4 @@
-package questao4.model;
+package model;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,23 +18,40 @@ public class Graph {
     }
 
     public void addAresta(Vertice inicio, Vertice fim) {
+        addAresta(inicio, fim, 0);
+    }
+
+    public void addAresta(Vertice inicio, Vertice fim, int peso) {
         if (!vertices.contains(inicio) || !vertices.contains(fim)) {
             throw new IllegalArgumentException("Ambos os vértices devem estar no grafo.");
         }
-        inicio.getAdjacentes().add(fim);
+        Aresta aresta = new Aresta(inicio, fim);
+        aresta.setPeso(peso);
+        inicio.getAdjacentes().add(aresta);
     }
 
     public List<Vertice> getVertices() {
         return vertices;
     }
 
-    @Override
-    public String toString() {
+
+    public String toStringBFS() {
         StringBuilder sb = new StringBuilder();
         for (Vertice vertice : vertices) {
             sb.append("Vertice: ").append(vertice.getNome())
                     .append(", Cor: ").append(vertice.getCor())
                     .append(", Distancia: ").append(vertice.getDistancia())
+                    .append("\n");
+        }
+        return sb.toString();
+    }
+
+    public String toStringDFS() {
+        StringBuilder sb = new StringBuilder();
+        for (Vertice vertice : vertices) {
+            sb.append("Vertice: ").append(vertice.getNome())
+                    .append(", Cor: ").append(vertice.getCor())
+                    .append(", Tempo inicial e final: ").append(vertice.getTempoInicial()).append("/").append(vertice.getTempoFinal())
                     .append("\n");
         }
         return sb.toString();

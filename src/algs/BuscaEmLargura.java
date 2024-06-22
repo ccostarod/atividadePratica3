@@ -1,8 +1,9 @@
-package questao4;
+package algs;
 
-import questao4.model.Graph;
-import questao4.model.Vertice;
-import questao4.utils.ParOrdenado;
+import model.Aresta;
+import model.Graph;
+import model.Vertice;
+import utils.ParOrdenado;
 
 import java.util.*;
 
@@ -27,7 +28,8 @@ public class BuscaEmLargura {
         fila.add(this.inicial);
         while (!fila.isEmpty()) {
             Vertice vert = fila.poll();
-            for (Vertice adj : vert.getAdjacentes()) {
+            for (Aresta aresta : vert.getAdjacentes()) {
+                Vertice adj = aresta.getFim();
                 if (adj.getCor().equals("branco")) {
                     adj.setCor("cinza");
                     adj.setDistancia(vert.getDistancia() + 1);
@@ -67,5 +69,9 @@ public class BuscaEmLargura {
         }
         Collections.reverse(lista);
         return lista;
+    }
+
+    public void setInicial(Vertice inicial) {
+        this.inicial = inicial;
     }
 }

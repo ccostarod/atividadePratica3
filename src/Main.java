@@ -1,9 +1,7 @@
-package questao4;
-
-
-import questao4.model.Graph;
-import questao4.utils.ParOrdenado;
-import questao4.model.Vertice;
+import algs.BuscaEmLargura;
+import model.Graph;
+import utils.ParOrdenado;
+import model.Vertice;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,13 +27,13 @@ public class Main {
         grafo.addAresta(v1, v2);
         grafo.addAresta(v2, v3);
         grafo.addAresta(v2, v4);
-        System.out.println(grafo);
+
         BuscaEmLargura buscaEmLargura = new BuscaEmLargura(grafo, v1);
         buscaEmLargura.bfs();
         List<Vertice> buscaNaDistancia = new ArrayList<>();
 
         buscaNaDistancia = buscaEmLargura.obterVerticesNaDistancia(1);
-        System.out.println(grafo);
+        System.out.println(grafo.toStringBFS());
         System.out.print("Arestas entre v1 e v4:");
         System.out.println(buscaEmLargura.contarArestasEntreVertices(v4));
         for (Vertice v : buscaNaDistancia) {
@@ -45,5 +43,11 @@ public class Main {
         List<ParOrdenado> caminho = new ArrayList<>();
         caminho = buscaEmLargura.caminhoEntreVertices(v4);
         System.out.println(caminho);
+
+        //TESTE DFS
+//        System.out.println(grafo.toStringDFS());
+//        BuscaEmProfundidade buscaEmProfundidade = new BuscaEmProfundidade();
+//        buscaEmProfundidade.dfs(grafo);
+//        System.out.println(grafo.toStringDFS());
     }
 }

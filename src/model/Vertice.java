@@ -1,4 +1,4 @@
-package questao4.model;
+package model;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -8,7 +8,7 @@ public class Vertice {
     private String cor;
     private int distancia;
     private Vertice pai;
-    private List<Vertice> adjacentes;
+    private List<Aresta> adjacentes;
 
     private int tempoInicial;
     private int tempoFinal;
@@ -37,7 +37,7 @@ public class Vertice {
         return pai;
     }
 
-    public List<Vertice> getAdjacentes() {
+    public List<Aresta> getAdjacentes() {
         return adjacentes;
     }
 
@@ -57,11 +57,13 @@ public class Vertice {
         this.pai = pai;
     }
 
-    public void setAdjacentes(ArrayList<Vertice> adjacentes) {
-        this.adjacentes = adjacentes;
+    public int getTempoInicial() {
+        return tempoInicial;
     }
 
-
+    public int getTempoFinal() {
+        return tempoFinal;
+    }
 
     public void setTempoInicial(int tempo) {
         this.tempoInicial = tempo;

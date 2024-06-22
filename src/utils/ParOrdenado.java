@@ -1,6 +1,6 @@
-package questao4.utils;
+package utils;
 
-import questao4.model.Vertice;
+import model.Vertice;
 
 public class ParOrdenado {
     String vertice1;

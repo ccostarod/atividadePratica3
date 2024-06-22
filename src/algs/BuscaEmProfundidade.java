@@ -1,7 +1,8 @@
 package algs;
 
-import questao4.model.Graph;
-import questao4.model.Vertice;
+import model.Aresta;
+import model.Graph;
+import model.Vertice;
 
 public class BuscaEmProfundidade {
     private int tempo;
@@ -22,7 +23,8 @@ public class BuscaEmProfundidade {
         this.tempo++;
         vertice.setTempoInicial(tempo);
         vertice.setCor("cinza");
-        for (Vertice v : vertice.getAdjacentes()) {
+        for (Aresta a : vertice.getAdjacentes()) {
+            Vertice v = a.getFim();
             if (v.getCor().equals("branco")) {
                 v.setPai(vertice);
                 dfsVisit(grafo, v);
