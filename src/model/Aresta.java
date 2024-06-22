@@ -33,4 +33,13 @@ public class Aresta {
     public void setPeso(int peso) {
         this.peso = peso;
     }
+
+    @Override
+    public String toString() {
+        return "Aresta{" +
+                "inicio=" + inicio +
+                ", fim=" + fim +
+                ", peso=" + peso +
+                '}';
+    }
 }

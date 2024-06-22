@@ -17,17 +17,34 @@ public class Graph {
         this.vertices.add(vertice);
     }
 
-    public void addAresta(Vertice inicio, Vertice fim) {
-        addAresta(inicio, fim, 0);
+    public void addArestaDirecionada(Vertice inicio, Vertice fim) {
+        addArestaDirecionada(inicio, fim, 0);
     }
 
-    public void addAresta(Vertice inicio, Vertice fim, int peso) {
+    public void addArestaNaoDirecionada(Vertice inicio, Vertice fim) {
+        addArestaNaoDirecionada(inicio, fim, 0);
+    }
+
+    public void addArestaDirecionada(Vertice inicio, Vertice fim, int peso) {
         if (!vertices.contains(inicio) || !vertices.contains(fim)) {
             throw new IllegalArgumentException("Ambos os vértices devem estar no grafo.");
         }
         Aresta aresta = new Aresta(inicio, fim);
         aresta.setPeso(peso);
         inicio.getAdjacentes().add(aresta);
+    }
+
+    public void addArestaNaoDirecionada(Vertice inicio, Vertice fim, int peso) {
+        if (!vertices.contains(inicio) || !vertices.contains(fim)) {
+            throw new IllegalArgumentException("Ambos os vértices devem estar no grafo.");
+        }
+        Aresta aresta1 = new Aresta(inicio, fim);
+        aresta1.setPeso(peso);
+        inicio.getAdjacentes().add(aresta1);
+
+        Aresta aresta2 = new Aresta(fim, inicio);
+        aresta2.setPeso(peso);
+        fim.getAdjacentes().add(aresta2);
     }
 
     public List<Vertice> getVertices() {

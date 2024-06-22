@@ -8,7 +8,7 @@ public class Vertice {
     private String cor;
     private Vertice pai;
     private List<Aresta> adjacentes;
-    // Atributo necessario para BFS
+    // Atributo necessario para BFS e dijkstra
     private int distancia;
     // Atributos necessarios para DFS
     private int tempoInicial;
@@ -72,5 +72,13 @@ public class Vertice {
 
     public void setTempoFinal(int tempoFinal) {
         this.tempoFinal = tempoFinal;
+    }
+
+    @Override
+    public String toString() {
+        final StringBuilder sb = new StringBuilder("Vertice{");
+        sb.append("nome='").append(nome).append('\'');
+        sb.append('}');
+        return sb.toString();
     }
 }
