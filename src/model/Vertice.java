@@ -6,10 +6,11 @@ import java.util.List;
 public class Vertice {
     private String nome;
     private String cor;
-    private int distancia;
     private Vertice pai;
     private List<Aresta> adjacentes;
-
+    // Atributo necessario para BFS
+    private int distancia;
+    // Atributos necessarios para DFS
     private int tempoInicial;
     private int tempoFinal;
 
