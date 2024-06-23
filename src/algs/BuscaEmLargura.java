@@ -9,23 +9,22 @@ import java.util.*;
 
 public class BuscaEmLargura {
     private Graph grafo;
-    private Vertice inicial;
 
-    public BuscaEmLargura(Graph grafo, Vertice inicial) {
+
+    public BuscaEmLargura(Graph grafo) {
         this.grafo = grafo;
-        this.inicial = inicial;
     }
     Queue<Vertice> fila =  new LinkedList<>();
-    public void bfs() {
+    public void bfs(Vertice inicial) {
         for (Vertice vertice : this.grafo.getVertices()) {
-            if (vertice.getNome().equals(this.inicial.getNome())) {
+            if (vertice.getNome().equals(inicial.getNome())) {
                 vertice.setCor("cinza");
                 vertice.setDistancia(0);
                 vertice.setPai(null);
                 break;
             }
         }
-        fila.add(this.inicial);
+        fila.add(inicial);
         while (!fila.isEmpty()) {
             Vertice vert = fila.poll();
             for (Aresta aresta : vert.getAdjacentes()) {
@@ -41,14 +40,14 @@ public class BuscaEmLargura {
         }
     }
 
-    public int contarArestasEntreVertices(Vertice destino) {
-        bfs();
-        return destino.getDistancia() - this.inicial.getDistancia();
+    public int contarArestasEntreVertices(Vertice inicial, Vertice destino) {
+        bfs(inicial);
+        return destino.getDistancia() - inicial.getDistancia();
     }
 
-    public List<Vertice> obterVerticesNaDistancia(int d) {
+    public List<Vertice> obterVerticesNaDistancia(Vertice inicial, int d) {
         List<Vertice> verticesRetornados = new ArrayList<>();
-        bfs();
+        bfs(inicial);
         for (Vertice v : grafo.getVertices()) {
             if (v.getDistancia() == d) {
                 verticesRetornados.add(v);
@@ -57,21 +56,20 @@ public class BuscaEmLargura {
         return verticesRetornados;
     }
 
-    // melhorar esse method
-    public List<ParOrdenado> caminhoEntreVertices(Vertice destino) {
-        bfs();
+    public List<ParOrdenado> caminhoEntreVertices(Vertice inicial,Vertice destino) {
+        bfs(inicial);
         List<ParOrdenado> lista= new ArrayList<>();
         Vertice aux = destino;
-        while (aux != this.inicial) {
+        while (aux != inicial) {
             ParOrdenado par = new ParOrdenado( aux.getPai(), aux);
             aux = aux.getPai();
             lista.add(par);
         }
+        if (aux == null) {
+            System.out.println("Não existe caminho entre os vértices especificados.");
+            return new ArrayList<>();
+        }
         Collections.reverse(lista);
         return lista;
-    }
-
-    public void setInicial(Vertice inicial) {
-        this.inicial = inicial;
     }
 }

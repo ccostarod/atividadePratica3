@@ -52,6 +52,32 @@ public class Graph {
     }
 
 
+    public void restaurar() {
+        for (Vertice vertice : vertices) {
+            vertice.setDistancia(Integer.MAX_VALUE);
+            vertice.setCor("branco");
+            vertice.setPai(null);
+            vertice.setTempoInicial(0);
+            vertice.setTempoFinal(0);
+        }
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        for (Vertice vertice : vertices) {
+            sb.append(vertice.getNome()).append(" -> ");
+            for (Aresta aresta : vertice.getAdjacentes()) {
+                sb.append(aresta.getFim().getNome()).append(" (").append(aresta.getPeso()).append("), ");
+            }
+            if (!vertice.getAdjacentes().isEmpty()) {
+                sb.setLength(sb.length() - 2);
+            }
+            sb.append("\n");
+        }
+        return sb.toString();
+    }
+
     public String toStringBFS() {
         StringBuilder sb = new StringBuilder();
         for (Vertice vertice : vertices) {
