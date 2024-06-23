@@ -3,7 +3,7 @@ package model;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Vertice {
+public class Vertice implements Comparable<Vertice>{
     private String nome;
     private String cor;
     private Vertice pai;
@@ -80,5 +80,10 @@ public class Vertice {
         sb.append("nome='").append(nome).append('\'');
         sb.append('}');
         return sb.toString();
+    }
+
+    @Override
+    public int compareTo(Vertice outro) {
+        return this.nome.compareTo(outro.getNome());
     }
 }

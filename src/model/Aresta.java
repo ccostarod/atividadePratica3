@@ -10,6 +10,12 @@ public class Aresta {
         this.fim = fim;
     }
 
+    public Aresta(Vertice inicio, Vertice fim, int peso) {
+        this.inicio = inicio;
+        this.fim = fim;
+        this.peso = peso;
+    }
+
     public Vertice getInicio() {
         return inicio;
     }
