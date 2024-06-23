@@ -269,13 +269,13 @@ public class Main {
         Graph grafo = new Graph();
 
         // Criação dos vértices
-        Vertice v0 = new Vertice("A");
-        Vertice v1 = new Vertice("B");
-        Vertice v2 = new Vertice("C");
-        Vertice v3 = new Vertice("D");
-        Vertice v4 = new Vertice("E");
-        Vertice v5 = new Vertice("F");
-        Vertice v6 = new Vertice("G");
+        Vertice v0 = new Vertice("0");
+        Vertice v1 = new Vertice("1");
+        Vertice v2 = new Vertice("2");
+        Vertice v3 = new Vertice("3");
+        Vertice v4 = new Vertice("4");
+        Vertice v5 = new Vertice("5");
+        Vertice v6 = new Vertice("6");
 
         // Adição dos vértices ao grafo
 
