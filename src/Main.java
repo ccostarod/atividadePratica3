@@ -49,19 +49,17 @@ public class Main {
 
                     while (opcaoDFS != 5) {
                         System.out.println("Menu DFS:");
-                        System.out.println("1 - Escolher origem");
-                        System.out.println("2 - Retornar número de arestas entre origem e destino");
-                        System.out.println("3 - Retornar caminho entre vértice de origem e destino");
-                        System.out.println("4 - Imprimir todas as arestas de tipo retorno");
+                        System.out.println("1 - Retornar número de arestas entre origem e destino");
+                        System.out.println("2 - Retornar caminho entre vértice de origem e destino");
+                        System.out.println("3 - Imprimir todas as arestas de tipo retorno");
+                        System.out.println("4 - Imprimir grafo com DFS");
                         System.out.println("5 - Sair");
                         System.out.print("Escolha uma opção: ");
                         opcaoDFS = scanner.nextInt();
 
                         switch (opcaoDFS) {
                             case 1:
-                                grafo.restaurar();
-                                System.out.println("Grafo restaurado.");
-                                System.out.print("Escolha o nome do vértice de origem: ");
+                                System.out.print("Escolha o vértice de origem: ");
                                 String origemNome = scanner.next();
                                 origemDFS = grafo.getVertices().stream()
                                         .filter(v -> v.getNome().equals(origemNome))
@@ -71,13 +69,7 @@ public class Main {
                                 if (origemDFS == null) {
                                     System.out.println("Vértice de origem não encontrado. Tente novamente.");
                                 }
-                                break;
-                            case 2:
-                                if (origemDFS == null) {
-                                    System.out.println("Por favor, escolha primeiro o vértice de origem.");
-                                    break;
-                                }
-                                System.out.print("Escolha o nome do vértice de destino: ");
+                                System.out.print("Escolha o vértice de destino: ");
                                 String destinoNomeDFS = scanner.next();
                                 Vertice destinoDFS = grafo.getVertices().stream()
                                         .filter(v -> v.getNome().equals(destinoNomeDFS))
@@ -91,12 +83,18 @@ public class Main {
 
                                 System.out.println("Número de arestas até o destino: " + dfs.numeroArestas(grafo, origemDFS, destinoDFS));
                                 break;
-                            case 3:
+                            case 2:
+                                System.out.print("Escolha o vértice de origem: ");
+                                origemNome = scanner.next();
+                                origemDFS = grafo.getVertices().stream()
+                                        .filter(v -> v.getNome().equals(origemNome))
+                                        .findFirst()
+                                        .orElse(null);
+
                                 if (origemDFS == null) {
-                                    System.out.println("Por favor, escolha primeiro o vértice de origem.");
-                                    break;
+                                    System.out.println("Vértice de origem não encontrado. Tente novamente.");
                                 }
-                                System.out.print("Escolha o nome do vértice de destino: ");
+                                System.out.print("Escolha o vértice de destino: ");
                                 String destinoCaminhoNome = scanner.next();
                                 Vertice destinoCaminho = grafo.getVertices().stream()
                                         .filter(v -> v.getNome().equals(destinoCaminhoNome))
@@ -110,10 +108,13 @@ public class Main {
 
                                 System.out.println("Caminho até o destino: " + dfs.caminhoEntreVertices(grafo, origemDFS, destinoCaminho));
                                 break;
-                            case 4:
+                            case 3:
                                 dfs.imprimirArestasTipoRetorno(grafo);
                                 break;
-                            case 5:
+                            case 4:
+                                System.out.println(grafo.toStringDFS());
+                                break;
+                            case 6:
                                 grafo.restaurar();
                                 System.out.println("Saindo do menu DFS...");
                                 break;
@@ -124,10 +125,38 @@ public class Main {
                     }
                     break;
                 case 4:
+                    int opcaoMST = 0;
+                    while (opcaoMST != 4) {
+                        System.out.println("Menu MST:");
+                        System.out.println("1 - Gerar novo MST");
+                        System.out.println("2 - Gerar PRIM");
+                        System.out.println("3 - Comparação entre novo MST e PRIM");
+                        System.out.println("4 - Sair");
+                        System.out.print("Escolha uma opção: ");
+                        opcaoMST = scanner.nextInt();
+
+                        switch (opcaoMST) {
+                            case 1:
+                                // Código para gerar novo MST
+                                break;
+                            case 2:
+                                // Código para gerar PRIM
+                                break;
+                            case 3:
+                                // Código para comparação entre novo MST e PRIM
+                                break;
+                            case 4:
+                                System.out.println("Saindo do menu MST...");
+                                break;
+                            default:
+                                System.out.println("Opção inválida. Tente novamente.");
+                                break;
+                        }
+                    }
                     break;
                 case 5:
                     System.out.println("Questão 3 - Dijkstra modificado");
-                    System.out.print("Escolha o nome do vértice inicial: ");
+                    System.out.print("Escolha o vértice inicial: ");
                     String inicialNomeVertice = scanner.next();
                     Vertice inicial = grafo.getVertices().stream()
                             .filter(v -> v.getNome().equals(inicialNomeVertice))
@@ -139,7 +168,7 @@ public class Main {
                         break;
                     }
 
-                    System.out.print("Escolha o nome do vértice de destino: ");
+                    System.out.print("Escolha o vértice de destino: ");
                     String destinoNome = scanner.next();
                     Vertice destino = grafo.getVertices().stream()
                             .filter(v -> v.getNome().equals(destinoNome))
@@ -168,24 +197,21 @@ public class Main {
                     int opcaoBFS = 0;
                     Vertice verticeInicial = null;
 
-                    System.out.println("Vértices existentes:");
-                    for (int i = 0; i < grafo.getVertices().size(); i++) {
-                        System.out.println((i + 1) + " - " + grafo.getVertices().get(i).getNome());
-                    }
 
-                    while (opcaoBFS != 5) {
+                    while (opcaoBFS != 6) {
                         System.out.println("Menu BFS:");
-                        System.out.println("1 - Escolher vértice inicial");
+                        System.out.println("1 - Iniciar BFS");
                         System.out.println("2 - Número de arestas até um destino");
                         System.out.println("3 - Caminho até um destino");
                         System.out.println("4 - Vértices a uma dada distância");
-                        System.out.println("5 - Sair");
+                        System.out.println("5 - Imprimir grafo com BFS");
+                        System.out.println("6 - Sair");
                         System.out.print("Escolha uma opção: ");
                         opcaoBFS = scanner.nextInt();
 
                         switch (opcaoBFS) {
                             case 1:
-                                System.out.print("Digite o nome do vértice inicial: ");
+                                System.out.print("Digite o vertice inicial: ");
                                 String inicialNome = scanner.next();
                                 verticeInicial = grafo.getVertices().stream()
                                         .filter(v -> v.getNome().equals(inicialNome))
@@ -203,7 +229,7 @@ public class Main {
                                     System.out.println("Por favor, escolha primeiro o vértice inicial.");
                                     break;
                                 }
-                                System.out.print("Digite o nome do vértice de destino: ");
+                                System.out.print("Digite o vértice de destino: ");
                                 String destinoIndex = scanner.next();
                                 Vertice destinoVert = grafo.getVertices().stream()
                                         .filter(v -> v.getNome().equals(destinoIndex))
@@ -222,7 +248,7 @@ public class Main {
                                     System.out.println("Por favor, escolha primeiro o vértice inicial.");
                                     break;
                                 }
-                                System.out.print("Digite o nome do vértice de destino: ");
+                                System.out.print("Digite o vértice de destino: ");
                                 String index = scanner.next();
                                 Vertice destinoCaminho = grafo.getVertices().stream()
                                         .filter(v -> v.getNome().equals(index))
@@ -244,7 +270,9 @@ public class Main {
                                 System.out.println("Vértices a uma dada distância: " + bfs.obterVerticesNaDistancia(verticeInicial, distancia));
                                 break;
                             case 5:
-                                grafo.restaurar();
+                                System.out.println(grafo.toStringBFS());
+                                break;
+                            case 6:
                                 System.out.println("Saindo do menu BFS...");
                                 break;
                             default:

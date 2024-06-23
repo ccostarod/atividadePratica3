@@ -17,13 +17,13 @@ public class BuscaEmLargura {
     Queue<Vertice> fila =  new LinkedList<>();
     public void bfs(Vertice inicial) {
         for (Vertice vertice : this.grafo.getVertices()) {
-            if (vertice.getNome().equals(inicial.getNome())) {
-                vertice.setCor("cinza");
-                vertice.setDistancia(0);
-                vertice.setPai(null);
-                break;
-            }
+            vertice.setCor("branco");
+            vertice.setDistancia(Integer.MAX_VALUE);
+            vertice.setPai(null);
         }
+        inicial.setCor("cinza");
+        inicial.setDistancia(0);
+
         fila.add(inicial);
         while (!fila.isEmpty()) {
             Vertice vert = fila.poll();
