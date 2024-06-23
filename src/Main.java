@@ -20,7 +20,7 @@ public class Main {
         Scanner scanner = new Scanner(System.in);
         int opcao = 0;
 
-        while (opcao != 6) {
+        while (opcao != 8) {
             System.out.println("Menu:");
             System.out.println("1 - Criar vertices");
             System.out.println("2 - Criar arestas entre vertices");
@@ -28,6 +28,8 @@ public class Main {
             System.out.println("4 - BFS - Questão 4");
             System.out.println("5 - DFS - Questão 1");
             System.out.println("6 - Dijkstra - Questão 3");
+            System.out.println("7 - Criar grafo pré-definido");
+            System.out.println("8 - Sair");
             System.out.print("Escolha uma opção: ");
             opcao = scanner.nextInt();
 
@@ -259,6 +261,13 @@ public class Main {
                     grafo.restaurar();
                     break;
                 case 7:
+                    System.out.println("Criando grafo pré-definido...");
+                    grafo = criarGrafoPreDefinido();
+                    bfs = new BuscaEmLargura(grafo);
+                    System.out.println("Grafo pré-definido criado.");
+                    break;
+                case 8:
+                    System.out.println("Saindo do programa...");
                     break;
                 default:
                     System.out.println("Opção inválida. Tente novamente.");
@@ -267,5 +276,41 @@ public class Main {
         }
 
         scanner.close();
+    }
+
+    private static Graph criarGrafoPreDefinido() {
+        Graph grafo = new Graph();
+
+        // Criação dos vértices
+        Vertice v0 = new Vertice("A");
+        Vertice v1 = new Vertice("B");
+        Vertice v2 = new Vertice("C");
+        Vertice v3 = new Vertice("D");
+        Vertice v4 = new Vertice("E");
+        Vertice v5 = new Vertice("F");
+        Vertice v6 = new Vertice("G");
+
+        // Adição dos vértices ao grafo
+
+        grafo.addVertice(v0);
+        grafo.addVertice(v1);
+        grafo.addVertice(v2);
+        grafo.addVertice(v3);
+        grafo.addVertice(v4);
+        grafo.addVertice(v5);
+        grafo.addVertice(v6);
+
+        // Adição das arestas não direcionadas com os pesos
+        grafo.addArestaNaoDirecionada(v0, v1, 2);
+        grafo.addArestaNaoDirecionada(v0, v2, 6);
+        grafo.addArestaNaoDirecionada(v1, v3, 5);
+        grafo.addArestaNaoDirecionada(v2, v3, 8);
+        grafo.addArestaNaoDirecionada(v3, v4, 10);
+        grafo.addArestaNaoDirecionada(v3, v5, 15);
+        grafo.addArestaNaoDirecionada(v4, v5, 6);
+        grafo.addArestaNaoDirecionada(v4, v6, 2);
+        grafo.addArestaNaoDirecionada(v5, v6, 6);
+
+        return grafo;
     }
 }
