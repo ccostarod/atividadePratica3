@@ -47,15 +47,15 @@ public class Prim {
             }
         }
 
-//        for (Vertice v : graph.getVertices()) {
-//            if (v.getPai() != null) {
-//                mstArestas.add(new Aresta(v.getPai(), v, v.getDistancia()));
-//            }
-//        }
-//
-//        for (Aresta aresta : mstArestas) {
-//            System.out.println("Aresta: " + aresta.getInicio().getNome() + " - " + aresta.getFim().getNome() + " | Peso: " + aresta.getPeso());
-//        }
+        for (Vertice v : graph.getVertices()) {
+            if (v.getPai() != null) {
+                mstArestas.add(new Aresta(v.getPai(), v, v.getDistancia()));
+            }
+        }
+
+        for (Aresta aresta : mstArestas) {
+            System.out.println("Aresta: " + aresta.getInicio().getNome() + " - " + aresta.getFim().getNome() + " | Peso: " + aresta.getPeso());
+        }
         return graph;
     }
 

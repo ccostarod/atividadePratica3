@@ -34,6 +34,6 @@ public class MainPrim {
         // Executa o algoritmo de Prim
         Prim prim = new Prim();
         Graph graph1 = prim.primMST(graph, a); // Começa a partir do vértice A
-        System.out.println(graph1.toStringBFS());
+//        System.out.println(graph1.toStringBFS());
     }
 }
