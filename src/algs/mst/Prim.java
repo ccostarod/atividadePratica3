@@ -9,11 +9,11 @@ import java.util.Collections;
 import java.util.List;
 
 public class Prim {
+    Heap heap = new Heap();
 
-    public Graph primMST(Graph graph, Vertice vertice) {
+    public List<Aresta> primMST(Graph graph, Vertice vertice) {
         List<Vertice> vertices = new ArrayList<>(graph.getVertices());
-        List<Aresta> mstArestas = new ArrayList<>(); // Lista para armazenar as arestas da MST
-        Graph grafo = new Graph();
+        List<Aresta> mstArestas = new ArrayList<>();
 
         if (!vertices.contains(vertice)) {
             throw new IllegalArgumentException("O vértice deve estar no grafo.");
@@ -24,14 +24,13 @@ public class Prim {
             v.setPai(null);
         }
 
-        vertice.setDistancia(0); // Key[r] = 0
+        vertice.setDistancia(0);
 
         // Constrói o heap mínimo
-        buildMinHeap(vertices);
+        heap.buildMinHeap(vertices);
 
         while (!vertices.isEmpty()) {
-            Vertice u = extrairMinimo(vertices);
-            grafo.addVertice(u);
+            Vertice u = heap.extrairMinimo(vertices);
 
             for (Aresta aresta : u.getAdjacentes()) {
                 Vertice v = aresta.getFim();
@@ -42,7 +41,7 @@ public class Prim {
 
                     // Atualiza a posição de v no heap
                     int index = vertices.indexOf(v);
-                    decreaseKey(vertices, index);
+                    diminuirChave(vertices, index);
                 }
             }
         }
@@ -53,47 +52,13 @@ public class Prim {
             }
         }
 
-        for (Aresta aresta : mstArestas) {
-            System.out.println("Aresta: " + aresta.getInicio().getNome() + " - " + aresta.getFim().getNome() + " | Peso: " + aresta.getPeso());
-        }
-        return graph;
+        return mstArestas;
     }
 
-    private void decreaseKey(List<Vertice> vertices, int i) {
+    private void diminuirChave(List<Vertice> vertices, int i) {
         while (i > 0 && vertices.get((i - 1) / 2).getDistancia() > vertices.get(i).getDistancia()) {
-            Collections.swap(vertices, i, (i - 1) / 2);
+            Collections.swap(vertices, i, (i - 1) / 2); //Se a propriedade do heap for violada (o valor do pai é maior que o valor do vértice i), o vértice i é trocado com seu pai.
             i = (i - 1) / 2;
-        }
-    }
-
-    private void buildMinHeap(List<Vertice> vertices) {
-        for (int i = vertices.size() / 2 - 1; i >= 0; i--) {
-            minHeapify(vertices, i, vertices.size());
-        }
-    }
-
-    private Vertice extrairMinimo(List<Vertice> vertices) {
-        Vertice min = vertices.get(0);
-        vertices.set(0, vertices.get(vertices.size() - 1)); // Substitui a raiz pelo último elemento
-        vertices.remove(vertices.size() - 1); // Remove o último elemento já que agora tá duplicado
-        minHeapify(vertices, 0, vertices.size()); // Restaurando propriedade do heap
-        return min;
-    }
-
-    private void minHeapify(List<Vertice> vertices, int i, int tamanho) {
-        int raiz = i;
-        int esquerda = 2 * i + 1;
-        int direita = 2 * i + 2;
-        if (esquerda < tamanho && vertices.get(esquerda).compareTo(vertices.get(raiz)) < 0) {
-            raiz = esquerda;
-        }
-        if (direita < tamanho && vertices.get(direita).compareTo(vertices.get(raiz)) < 0) {
-            raiz = direita;
-        }
-
-        if (raiz != i) {
-            Collections.swap(vertices, i, raiz);
-            minHeapify(vertices, raiz, tamanho);
         }
     }
 }

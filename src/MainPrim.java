@@ -1,6 +1,10 @@
+import algs.mst.NovoMST;
 import algs.mst.Prim;
+import model.Aresta;
 import model.Graph;
 import model.Vertice;
+
+import java.util.List;
 
 public class MainPrim {
     public static void main(String[] args) {
@@ -31,9 +35,17 @@ public class MainPrim {
         graph.addArestaNaoDirecionada(c, e, 2);
         graph.addArestaNaoDirecionada(d, e, 1);
 
-        // Executa o algoritmo de Prim
         Prim prim = new Prim();
-        Graph graph1 = prim.primMST(graph, a); // Começa a partir do vértice A
-//        System.out.println(graph1.toStringBFS());
+        long inicio = System.currentTimeMillis();
+        List<Aresta> mstArestas = prim.primMST(graph, a);
+        long fim = System.currentTimeMillis();
+
+        long tempo = fim - inicio;
+        System.out.println(tempo);
+        System.out.println();
+
+        for (Aresta aresta : mstArestas) {
+            System.out.println("Aresta: " + aresta.getInicio().getNome() + " - " + aresta.getFim().getNome() + " | Peso: " + aresta.getPeso());
+        }
     }
 }

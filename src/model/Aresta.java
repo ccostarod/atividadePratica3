@@ -1,5 +1,7 @@
 package model;
 
+import java.util.Objects;
+
 public class Aresta {
     private Vertice inicio;
     private Vertice fim;
@@ -38,6 +40,16 @@ public class Aresta {
 
     public void setPeso(int peso) {
         this.peso = peso;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Aresta aresta = (Aresta) o;
+        return peso == aresta.peso &&
+                ((Objects.equals(inicio, aresta.inicio) && Objects.equals(fim, aresta.fim)) ||
+                        (Objects.equals(inicio, aresta.fim) && Objects.equals(fim, aresta.inicio)));
     }
 
     @Override

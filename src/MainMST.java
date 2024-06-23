@@ -1,6 +1,9 @@
 import algs.mst.NovoMST;
+import model.Aresta;
 import model.Graph;
 import model.Vertice;
+
+import java.util.List;
 
 
 public class MainMST {
@@ -34,6 +37,17 @@ public class MainMST {
 
         // Executa o algoritmo de Prim modificado
         NovoMST novoMST = new NovoMST();
-        novoMST.mst(graph);
+        long inicio = System.currentTimeMillis();
+        List<Aresta> mstArestas = novoMST.mst(graph);
+        long fim = System.currentTimeMillis();
+
+        long tempo = fim - inicio;
+        System.out.println(tempo);
+        System.out.println();
+
+        // Imprimir as arestas da MST
+        for (Aresta aresta : mstArestas) {
+            System.out.println("Aresta: " + aresta.getInicio().getNome() + " - " + aresta.getFim().getNome() + " | Peso: " + aresta.getPeso());
+        }
     }
 }
