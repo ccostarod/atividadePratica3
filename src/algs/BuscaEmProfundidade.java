@@ -3,8 +3,10 @@ package algs;
 import model.Aresta;
 import model.Graph;
 import model.Vertice;
+import utils.ParOrdenado;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class    BuscaEmProfundidade {
@@ -70,11 +72,11 @@ public class    BuscaEmProfundidade {
         return contagem;
     }
 
-    public List<Vertice> caminhoEntreVertices(Graph graph, Vertice origem, Vertice destino){
+    public List<ParOrdenado> caminhoEntreVertices(Graph graph, Vertice origem, Vertice destino){
         dfs(graph);
         Vertice atual = destino;
         List<Vertice> verticesInvertido = new ArrayList<>();
-        List<Vertice> verticesCaminho = new ArrayList<>();
+        List<ParOrdenado> caminho = new ArrayList<>();
 
         if (!graph.getVertices().contains(origem) || !graph.getVertices().contains(destino)) {
             throw new IllegalArgumentException("Ambos os vértices devem estar no grafo.");
@@ -89,23 +91,24 @@ public class    BuscaEmProfundidade {
         }
         verticesInvertido.add(atual);
 
-        while(!verticesInvertido.isEmpty()){
-            Vertice v = verticesInvertido.get(verticesInvertido.size() - 1);
-            verticesInvertido.remove(v);
-            verticesCaminho.add(v); //adicionando a nova lista de caminhos agora da maneria correta iniciando o caminho na origem
+        for (int i = verticesInvertido.size() - 1; i > 0; i--) {
+            Vertice v1 = verticesInvertido.get(i);
+            Vertice v2 = verticesInvertido.get(i - 1);
+            caminho.add(new ParOrdenado(v1, v2));
         }
 
         if (atual == null) {
             return null; //não encontrou o vértice origem na árvore de profundidade
         }
-        return verticesCaminho;
+        return caminho;
     }
 
     public void imprimirArestasTipoRetorno(Graph grafo) {
         dfs(grafo);
         System.out.println("Arestas de retorno:");
         for (Aresta aresta : arestasTipoRetorno) {
-            System.out.println(aresta.getInicio().getNome() + " -> " + aresta.getFim().getNome());
+            ParOrdenado par = new ParOrdenado(aresta);
+            System.out.println(par);
         }
     }
 }

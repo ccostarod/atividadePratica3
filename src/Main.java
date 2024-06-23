@@ -114,6 +114,7 @@ public class Main {
                                 dfs.imprimirArestasTipoRetorno(grafo);
                                 break;
                             case 5:
+                                grafo.restaurar();
                                 System.out.println("Saindo do menu DFS...");
                                 break;
                             default:
@@ -172,20 +173,19 @@ public class Main {
                         System.out.println((i + 1) + " - " + grafo.getVertices().get(i).getNome());
                     }
 
-                    while (opcaoBFS != 7) {
+                    while (opcaoBFS != 5) {
                         System.out.println("Menu BFS:");
                         System.out.println("1 - Escolher vértice inicial");
                         System.out.println("2 - Número de arestas até um destino");
                         System.out.println("3 - Caminho até um destino");
                         System.out.println("4 - Vértices a uma dada distância");
-                        System.out.println("5 - Alterar vértice inicial");
-                        System.out.println("6 - Sair");
+                        System.out.println("5 - Sair");
                         System.out.print("Escolha uma opção: ");
                         opcaoBFS = scanner.nextInt();
 
                         switch (opcaoBFS) {
                             case 1:
-                                System.out.print("Escolha o nome do vértice inicial: ");
+                                System.out.print("Digite o nome do vértice inicial: ");
                                 String inicialNome = scanner.next();
                                 verticeInicial = grafo.getVertices().stream()
                                         .filter(v -> v.getNome().equals(inicialNome))
@@ -203,7 +203,7 @@ public class Main {
                                     System.out.println("Por favor, escolha primeiro o vértice inicial.");
                                     break;
                                 }
-                                System.out.print("Escolha o nome do vértice de destino: ");
+                                System.out.print("Digite o nome do vértice de destino: ");
                                 String destinoIndex = scanner.next();
                                 Vertice destinoVert = grafo.getVertices().stream()
                                         .filter(v -> v.getNome().equals(destinoIndex))
@@ -222,7 +222,7 @@ public class Main {
                                     System.out.println("Por favor, escolha primeiro o vértice inicial.");
                                     break;
                                 }
-                                System.out.print("Escolha o nome do vértice de destino: ");
+                                System.out.print("Digite o nome do vértice de destino: ");
                                 String index = scanner.next();
                                 Vertice destinoCaminho = grafo.getVertices().stream()
                                         .filter(v -> v.getNome().equals(index))
@@ -244,21 +244,6 @@ public class Main {
                                 System.out.println("Vértices a uma dada distância: " + bfs.obterVerticesNaDistancia(verticeInicial, distancia));
                                 break;
                             case 5:
-                                grafo.restaurar();
-                                System.out.print("Escolha o nome do vértice inicial: ");
-                                String inicialVert = scanner.next();
-                                verticeInicial = grafo.getVertices().stream()
-                                        .filter(v -> v.getNome().equals(inicialVert))
-                                        .findFirst()
-                                        .orElse(null);
-
-                                if (verticeInicial == null) {
-                                    System.out.println("Vértice inicial não encontrado. Tente novamente.");
-                                    break;
-                                }
-                                bfs.bfs(verticeInicial);
-                                break;
-                            case 6:
                                 grafo.restaurar();
                                 System.out.println("Saindo do menu BFS...");
                                 break;
