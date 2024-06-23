@@ -1,6 +1,9 @@
 import algs.BuscaEmLargura;
 import algs.BuscaEmProfundidade;
 import algs.Dijkstra;
+import algs.mst.NovoMST;
+import algs.mst.Prim;
+import model.Aresta;
 import model.Graph;
 import model.Vertice;
 import utils.ParOrdenado;
@@ -16,9 +19,12 @@ public class Main {
         BuscaEmLargura bfs = new BuscaEmLargura(grafo);
         BuscaEmProfundidade dfs = new BuscaEmProfundidade();
         Dijkstra dijkstra = new Dijkstra();
+        NovoMST novoMST = new NovoMST();
+        Prim prim = new Prim();
 
         Scanner scanner = new Scanner(System.in);
         int opcao = 0;
+
 
         while (opcao != 7) {
             System.out.println("Menu:");
@@ -31,6 +37,7 @@ public class Main {
             System.out.println("7 - Sair");
             System.out.print("Escolha uma opção: ");
             opcao = scanner.nextInt();
+
 
             switch (opcao) {
                 case 1:
@@ -126,26 +133,46 @@ public class Main {
                     break;
                 case 4:
                     int opcaoMST = 0;
-                    while (opcaoMST != 4) {
+                    while (opcaoMST != 3) {
                         System.out.println("Menu MST:");
                         System.out.println("1 - Gerar novo MST");
                         System.out.println("2 - Gerar PRIM");
-                        System.out.println("3 - Comparação entre novo MST e PRIM");
-                        System.out.println("4 - Sair");
+                        System.out.println("3 - Sair");
                         System.out.print("Escolha uma opção: ");
                         opcaoMST = scanner.nextInt();
-
                         switch (opcaoMST) {
                             case 1:
-                                // Código para gerar novo MST
+                                long inicio = System.currentTimeMillis();
+                                List<Aresta> mstArestas = novoMST.mst(grafo);
+                                long fim = System.currentTimeMillis();
+
+                                long tempo = fim - inicio;
+
+                                for (Aresta aresta : mstArestas) {
+                                    System.out.println("Aresta: " + aresta.getInicio().getNome() + " - " + aresta.getFim().getNome() + " | Peso: " + aresta.getPeso());
+                                }
+                                System.out.println("Tempo de execução: " + tempo + "ms");
                                 break;
                             case 2:
-                                // Código para gerar PRIM
+                                System.out.println("Por qual vertice deseja começar: ");
+                                String verticeNome = scanner.next();
+                                Vertice vertice = grafo.getVertices().stream()
+                                        .filter(v -> v.getNome().equals(verticeNome))
+                                        .findFirst()
+                                        .orElse(null);
+                                inicio = System.currentTimeMillis();
+                                mstArestas = prim.primMST(grafo, vertice);
+                                fim = System.currentTimeMillis();
+
+                                tempo = fim - inicio;
+
+                                for (Aresta aresta : mstArestas) {
+                                    System.out.println("Aresta: " + aresta.getInicio().getNome() + " - " + aresta.getFim().getNome() + " | Peso: " + aresta.getPeso());
+                                }
+                                System.out.println("Tempo de execução: " + tempo + "ms");
                                 break;
                             case 3:
-                                // Código para comparação entre novo MST e PRIM
-                                break;
-                            case 4:
+                                grafo.restaurar();
                                 System.out.println("Saindo do menu MST...");
                                 break;
                             default:
@@ -303,29 +330,28 @@ public class Main {
         Vertice v3 = new Vertice("3");
         Vertice v4 = new Vertice("4");
         Vertice v5 = new Vertice("5");
-        Vertice v6 = new Vertice("6");
 
         // Adição dos vértices ao grafo
-
         grafo.addVertice(v0);
         grafo.addVertice(v1);
         grafo.addVertice(v2);
         grafo.addVertice(v3);
         grafo.addVertice(v4);
         grafo.addVertice(v5);
-        grafo.addVertice(v6);
 
-        // Adição das arestas não direcionadas com os pesos
-        grafo.addArestaNaoDirecionada(v0, v1, 2);
-        grafo.addArestaNaoDirecionada(v0, v2, 6);
-        grafo.addArestaNaoDirecionada(v1, v3, 5);
-        grafo.addArestaNaoDirecionada(v2, v3, 8);
-        grafo.addArestaNaoDirecionada(v3, v4, 10);
-        grafo.addArestaNaoDirecionada(v3, v5, 15);
-        grafo.addArestaNaoDirecionada(v4, v5, 6);
-        grafo.addArestaNaoDirecionada(v4, v6, 2);
-        grafo.addArestaNaoDirecionada(v5, v6, 6);
+        // Adição das arestas direcionadas
+        grafo.addArestaDirecionada(v0, v1);
+        grafo.addArestaDirecionada(v0, v4);
+        grafo.addArestaDirecionada(v1, v2);
+        grafo.addArestaDirecionada(v1, v4);
+        grafo.addArestaDirecionada(v2, v3);
+        grafo.addArestaDirecionada(v3, v1);
+        grafo.addArestaDirecionada(v4, v3);
+        grafo.addArestaDirecionada(v5, v0);
+        grafo.addArestaDirecionada(v5, v4);
 
         return grafo;
     }
+
+
 }

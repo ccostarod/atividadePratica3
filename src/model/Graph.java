@@ -1,7 +1,9 @@
 package model;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class Graph {
     private List<Vertice> vertices;
@@ -49,6 +51,14 @@ public class Graph {
 
     public List<Vertice> getVertices() {
         return vertices;
+    }
+
+    public List<Aresta> getArestas() {
+        Set<Aresta> arestas = new HashSet<>();
+        for (Vertice vertice : vertices) {
+            arestas.addAll(vertice.getAdjacentes());
+        }
+        return new ArrayList<>(arestas);
     }
 
 
