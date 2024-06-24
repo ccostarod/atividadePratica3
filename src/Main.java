@@ -323,7 +323,6 @@ public class Main {
     private static Graph criarGrafoPreDefinido() {
         Graph grafo = new Graph();
 
-<<<<<<< HEAD
         Vertice a = new Vertice("A");
         Vertice b = new Vertice("B");
         Vertice c = new Vertice("C");
@@ -346,7 +345,7 @@ public class Main {
         grafo.addArestaNaoDirecionada(c, d, 8);
         grafo.addArestaNaoDirecionada(c, e, 2);
         grafo.addArestaNaoDirecionada(d, e, 1);
-=======
+
         // Criação dos vértices
         Vertice v0 = new Vertice("0");
         Vertice v1 = new Vertice("1");
@@ -376,7 +375,6 @@ public class Main {
         grafo.addArestaNaoDirecionada(v4, v5, 6);
         grafo.addArestaNaoDirecionada(v4, v6, 2);
         grafo.addArestaNaoDirecionada(v5, v6, 6);
->>>>>>> adae9a91dd12ac573f5a6417edb641dff087acc3
 
         return grafo;
     }
