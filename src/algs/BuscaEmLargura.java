@@ -29,10 +29,12 @@ public class BuscaEmLargura {
         inicial.setCor("cinza");
         inicial.setDistancia(0);
 
-
+        // Adiciona o vértice inicial na fila
         fila.add(inicial);
 
+        // Enquanto a fila não estiver vazia
         while (!fila.isEmpty()) {
+            // Remove o próximo vértice da fila
             Vertice vert = fila.poll();
 
             // Para cada vértice adjacente ao vértice removido
@@ -78,4 +80,27 @@ public class BuscaEmLargura {
     }
 
     // Método que retorna o caminho entre dois vértices
-    public List<ParO
+    public List<ParOrdenado> caminhoEntreVertices(Vertice inicial,Vertice destino) {
+        bfs(inicial); // Realiza a busca em largura a partir do vértice inicial
+        List<ParOrdenado> lista= new ArrayList<>();
+        Vertice aux = destino;
+
+        // Enquanto não chegar no vértice inicial
+        while (aux != inicial) {
+            // Adiciona o par (pai, vértice) na lista
+            ParOrdenado par = new ParOrdenado( aux.getPai(), aux);
+            aux = aux.getPai();
+            lista.add(par);
+        }
+
+        // Se não existe caminho entre os vértices especificados
+        if (aux == null) {
+            System.out.println("Não existe caminho entre os vértices especificados.");
+            return new ArrayList<>();
+        }
+
+        // Inverte a lista para que o caminho esteja na ordem correta
+        Collections.reverse(lista);
+        return lista; // Retorna a lista de pares ordenados que representam o caminho
+    }
+}
