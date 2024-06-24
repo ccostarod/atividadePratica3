@@ -323,6 +323,7 @@ public class Main {
     private static Graph criarGrafoPreDefinido() {
         Graph grafo = new Graph();
 
+<<<<<<< HEAD
         Vertice a = new Vertice("A");
         Vertice b = new Vertice("B");
         Vertice c = new Vertice("C");
@@ -345,9 +346,41 @@ public class Main {
         grafo.addArestaNaoDirecionada(c, d, 8);
         grafo.addArestaNaoDirecionada(c, e, 2);
         grafo.addArestaNaoDirecionada(d, e, 1);
+=======
+        // Criação dos vértices
+        Vertice v0 = new Vertice("0");
+        Vertice v1 = new Vertice("1");
+        Vertice v2 = new Vertice("2");
+        Vertice v3 = new Vertice("3");
+        Vertice v4 = new Vertice("4");
+        Vertice v5 = new Vertice("5");
+        Vertice v6 = new Vertice("6");
+
+        // Adição dos vértices ao grafo
+
+        grafo.addVertice(v0);
+        grafo.addVertice(v1);
+        grafo.addVertice(v2);
+        grafo.addVertice(v3);
+        grafo.addVertice(v4);
+        grafo.addVertice(v5);
+        grafo.addVertice(v6);
+
+        // Adição das arestas não direcionadas com os pesos
+        grafo.addArestaNaoDirecionada(v0, v1, 2);
+        grafo.addArestaNaoDirecionada(v0, v2, 6);
+        grafo.addArestaNaoDirecionada(v1, v3, 5);
+        grafo.addArestaNaoDirecionada(v2, v3, 8);
+        grafo.addArestaNaoDirecionada(v3, v4, 10);
+        grafo.addArestaNaoDirecionada(v3, v5, 15);
+        grafo.addArestaNaoDirecionada(v4, v5, 6);
+        grafo.addArestaNaoDirecionada(v4, v6, 2);
+        grafo.addArestaNaoDirecionada(v5, v6, 6);
+>>>>>>> adae9a91dd12ac573f5a6417edb641dff087acc3
 
         return grafo;
     }
+
 
 
 }

@@ -1,90 +1,3 @@
-//package algs;
-//
-//import model.Aresta;
-//import model.Graph;
-//import model.Vertice;
-//import utils.ParOrdenado;
-//
-//import java.util.*;
-//
-//public class Dijkstra {
-//    public void dijkstra(Graph grafo, Vertice inicial) {
-//        for (Vertice v : grafo.getVertices()) {
-//            if (v.getNome().equals(inicial.getNome())) {
-//                v.setDistancia(0);
-//            }
-//        }
-//
-//        PriorityQueue<Vertice> fila = new PriorityQueue<>(new VerticeComparator());
-//        fila.add(inicial);
-//
-//        while (!fila.isEmpty()) {
-//            Vertice vert = fila.poll();
-//
-//            for (Aresta aresta : vert.getAdjacentes()) {
-//                Vertice adj = aresta.getFim();
-//                int peso = aresta.getPeso();
-//                int distancia = vert.getDistancia() + peso;
-//                if (distancia < adj.getDistancia()) {
-//                    fila.remove(adj);
-//                    adj.setDistancia(distancia);
-//                    adj.setPai(vert);
-//                    fila.add(adj);
-//                }
-//            }
-//        }
-//    }
-//
-//    public List<ParOrdenado> getCaminhoMinimo(Vertice destino) {
-//        List<ParOrdenado> caminho = new ArrayList<>();
-//        for (Vertice v = destino; v != null; v = v.getPai()) {
-//            if (v.getPai() != null)
-//                caminho.add(new ParOrdenado(v.getPai(), v));
-//        }
-//        Collections.reverse(caminho);
-//        return caminho;
-//    }
-//
-//    public List<ParOrdenado> getSegundoCaminhoMinimo(Graph grafo, Vertice inicial, Vertice destino) {
-//        dijkstra(grafo, inicial);
-//        List<ParOrdenado> caminhoMinimo = new ArrayList<>(getCaminhoMinimo(destino));
-//        int segundoCaminhoMinimoDist = Integer.MAX_VALUE;
-//        List<ParOrdenado> segundoCaminhoMinimo = null;
-//
-//        for (ParOrdenado aresta : caminhoMinimo) {
-//            Vertice inicio = grafo.getVertices().stream().filter(v -> v.getNome().equals(aresta.getVertice1())).findFirst().get();
-//            Vertice fim = grafo.getVertices().stream().filter(v -> v.getNome().equals(aresta.getVertice2())).findFirst().get();
-//            Aresta arestaRemovida = inicio.getAdjacentes().stream().filter(a -> a.getFim().getNome().equals(fim.getNome())).findFirst().get();
-//            inicio.getAdjacentes().remove(arestaRemovida);
-//            fim.getAdjacentes().remove(arestaRemovida);
-//
-//            grafo.restaurar();
-//            dijkstra(grafo, inicial);
-//            List<ParOrdenado> novoCaminho = getCaminhoMinimo(destino);
-//            int novaDistancia = destino.getDistancia();
-//
-//            if (novaDistancia < segundoCaminhoMinimoDist && novaDistancia != Integer.MAX_VALUE) {
-//                segundoCaminhoMinimoDist = novaDistancia;
-//                segundoCaminhoMinimo = novoCaminho;
-//            }
-//
-//            inicio.getAdjacentes().add(arestaRemovida);
-//            fim.getAdjacentes().add(arestaRemovida);
-//        }
-//
-//        return segundoCaminhoMinimo;
-//    }
-//
-//
-//
-//    private class VerticeComparator implements Comparator<Vertice> {
-//        @Override
-//        public int compare(Vertice v1, Vertice v2) {
-//            return Integer.compare(v1.getDistancia(), v2.getDistancia());
-//        }
-//    }
-//}
-
 package algs;
 
 import model.Aresta;
@@ -96,19 +9,26 @@ import java.util.*;
 
 public class Dijkstra {
 
+    // Método principal do algoritmo de Dijkstra
     public void dijkstra(Graph grafo, Vertice s) {
+        // Inicializa as distâncias dos vértices
         initialize(grafo, s);
 
+        // Cria uma fila de prioridade para os vértices
         PriorityQueue<Vertice> Q = new PriorityQueue<>(new VerticeComparator());
         Q.addAll(grafo.getVertices());
 
+        // Enquanto a fila não estiver vazia
         while (!Q.isEmpty()) {
+            // Extrai o vértice com a menor distância
             Vertice u = extractMin(Q);
 
+            // Para cada aresta adjacente ao vértice
             for (Aresta aresta : u.getAdjacentes()) {
                 Vertice v = aresta.getFim();
+                // Se a distância do vértice adjacente for maior que a distância do vértice atual mais o peso da aresta
                 if (relax(u, v, aresta.getPeso())) {
-                    // Se relaxar atualizou a distância de v, precisamos reordenar a fila
+                    // Atualiza a distância do vértice adjacente e reordena a fila
                     Q.remove(v);
                     Q.add(v);
                 }
@@ -116,6 +36,7 @@ public class Dijkstra {
         }
     }
 
+    // Método para inicializar as distâncias dos vértices
     private void initialize(Graph grafo, Vertice s) {
         for (Vertice v : grafo.getVertices()) {
             v.setDistancia(Integer.MAX_VALUE);
@@ -124,10 +45,12 @@ public class Dijkstra {
         s.setDistancia(0);
     }
 
+    // Método para extrair o vértice com a menor distância da fila
     private Vertice extractMin(PriorityQueue<Vertice> Q) {
         return Q.poll();
     }
 
+    // Método para relaxar a aresta, ou seja, verificar se a distância do vértice adjacente é maior que a distância do vértice atual mais o peso da aresta
     private boolean relax(Vertice u, Vertice v, int peso) {
         if (v.getDistancia() > u.getDistancia() + peso) {
             v.setDistancia(u.getDistancia() + peso);
@@ -137,6 +60,7 @@ public class Dijkstra {
         return false;
     }
 
+    // Método para obter o caminho mínimo até o vértice de destino
     public List<ParOrdenado> getCaminhoMinimo(Vertice destino) {
         List<ParOrdenado> caminho = new ArrayList<>();
         Set<Vertice> visitados = new HashSet<>();
@@ -152,6 +76,7 @@ public class Dijkstra {
         return caminho;
     }
 
+    // Método para obter o segundo caminho mínimo até o vértice de destino
     public List<ParOrdenado> getSegundoCaminhoMinimo(Graph grafo, Vertice inicial, Vertice destino) {
         dijkstra(grafo, inicial);
         List<ParOrdenado> caminhoMinimo = new ArrayList<>(getCaminhoMinimo(destino));
@@ -165,7 +90,7 @@ public class Dijkstra {
 
             inicio.getAdjacentes().remove(arestaRemovida);
 
-            // Reset the distances of the vertices
+            // Reseta as distâncias dos vértices
             initialize(grafo, inicial);
             dijkstra(grafo, inicial);
             List<ParOrdenado> novoCaminho = getCaminhoMinimo(destino);
@@ -176,13 +101,14 @@ public class Dijkstra {
                 segundoCaminhoMinimo = novoCaminho;
             }
 
-            // Restaurar a aresta removida
+            // Restaura a aresta removida
             inicio.getAdjacentes().add(arestaRemovida);
         }
 
         return segundoCaminhoMinimo;
     }
 
+    // Comparador para ordenar os vértices na fila de prioridade
     private class VerticeComparator implements Comparator<Vertice> {
         @Override
         public int compare(Vertice v1, Vertice v2) {
@@ -190,5 +116,3 @@ public class Dijkstra {
         }
     }
 }
-
-
