@@ -323,32 +323,28 @@ public class Main {
     private static Graph criarGrafoPreDefinido() {
         Graph grafo = new Graph();
 
-        // Criação dos vértices
-        Vertice v0 = new Vertice("0");
-        Vertice v1 = new Vertice("1");
-        Vertice v2 = new Vertice("2");
-        Vertice v3 = new Vertice("3");
-        Vertice v4 = new Vertice("4");
-        Vertice v5 = new Vertice("5");
+        Vertice a = new Vertice("A");
+        Vertice b = new Vertice("B");
+        Vertice c = new Vertice("C");
+        Vertice d = new Vertice("D");
+        Vertice e = new Vertice("E");
 
-        // Adição dos vértices ao grafo
-        grafo.addVertice(v0);
-        grafo.addVertice(v1);
-        grafo.addVertice(v2);
-        grafo.addVertice(v3);
-        grafo.addVertice(v4);
-        grafo.addVertice(v5);
+        // Adiciona os vértices ao grafo
+        grafo.addVertice(a);
+        grafo.addVertice(b);
+        grafo.addVertice(c);
+        grafo.addVertice(d);
+        grafo.addVertice(e);
 
-        // Adição das arestas direcionadas
-        grafo.addArestaDirecionada(v0, v1);
-        grafo.addArestaDirecionada(v0, v4);
-        grafo.addArestaDirecionada(v1, v2);
-        grafo.addArestaDirecionada(v1, v4);
-        grafo.addArestaDirecionada(v2, v3);
-        grafo.addArestaDirecionada(v3, v1);
-        grafo.addArestaDirecionada(v4, v3);
-        grafo.addArestaDirecionada(v5, v0);
-        grafo.addArestaDirecionada(v5, v4);
+        // Adiciona as arestas
+        grafo.addArestaNaoDirecionada(a, b, 3);
+        grafo.addArestaNaoDirecionada(a, c, 5);
+        grafo.addArestaNaoDirecionada(a, d, 8);
+        grafo.addArestaNaoDirecionada(a, e, 9);
+        grafo.addArestaNaoDirecionada(b, d, 2);
+        grafo.addArestaNaoDirecionada(c, d, 8);
+        grafo.addArestaNaoDirecionada(c, e, 2);
+        grafo.addArestaNaoDirecionada(d, e, 1);
 
         return grafo;
     }

@@ -6,7 +6,6 @@ import model.Vertice;
 import utils.ParOrdenado;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 public class    BuscaEmProfundidade {
@@ -18,6 +17,7 @@ public class    BuscaEmProfundidade {
     }
 
     public void dfs(Graph grafo) {
+        arestasTipoRetorno.clear();
         for (Vertice vertice : grafo.getVertices()) {
             vertice.setCor("branco");
             vertice.setPai(null);
