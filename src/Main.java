@@ -319,41 +319,18 @@ public class Main {
 
         scanner.close();
     }
-
+    // Teste de grafo para questão 4 - BFS
     private static Graph criarGrafoPreDefinido() {
         Graph grafo = new Graph();
 
-        Vertice a = new Vertice("A");
-        Vertice b = new Vertice("B");
-        Vertice c = new Vertice("C");
-        Vertice d = new Vertice("D");
-        Vertice e = new Vertice("E");
-
-        // Adiciona os vértices ao grafo
-        grafo.addVertice(a);
-        grafo.addVertice(b);
-        grafo.addVertice(c);
-        grafo.addVertice(d);
-        grafo.addVertice(e);
-
-        // Adiciona as arestas
-        grafo.addArestaNaoDirecionada(a, b, 3);
-        grafo.addArestaNaoDirecionada(a, c, 5);
-        grafo.addArestaNaoDirecionada(a, d, 8);
-        grafo.addArestaNaoDirecionada(a, e, 9);
-        grafo.addArestaNaoDirecionada(b, d, 2);
-        grafo.addArestaNaoDirecionada(c, d, 8);
-        grafo.addArestaNaoDirecionada(c, e, 2);
-        grafo.addArestaNaoDirecionada(d, e, 1);
-
         // Criação dos vértices
-        Vertice v0 = new Vertice("0");
-        Vertice v1 = new Vertice("1");
-        Vertice v2 = new Vertice("2");
-        Vertice v3 = new Vertice("3");
-        Vertice v4 = new Vertice("4");
-        Vertice v5 = new Vertice("5");
-        Vertice v6 = new Vertice("6");
+        Vertice v0 = new Vertice("A");
+        Vertice v1 = new Vertice("B");
+        Vertice v2 = new Vertice("C");
+        Vertice v3 = new Vertice("D");
+        Vertice v4 = new Vertice("E");
+        Vertice v5 = new Vertice("F");
+        Vertice v6 = new Vertice("G");
 
         // Adição dos vértices ao grafo
 
@@ -376,9 +353,8 @@ public class Main {
         grafo.addArestaNaoDirecionada(v4, v6, 2);
         grafo.addArestaNaoDirecionada(v5, v6, 6);
 
+
         return grafo;
     }
-
-
 
 }

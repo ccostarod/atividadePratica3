@@ -1,0 +1,128 @@
+Grafos modelos:
+
+Dijkstra:
+       	// Criação dos vértices
+        Vertice v0 = new Vertice("A");
+        Vertice v1 = new Vertice("B");
+        Vertice v2 = new Vertice("C");
+        Vertice v3 = new Vertice("D");
+        Vertice v4 = new Vertice("E");
+        Vertice v5 = new Vertice("F");
+        Vertice v6 = new Vertice("G");
+
+        // Adição dos vértices ao grafo
+
+        grafo.addVertice(v0);
+        grafo.addVertice(v1);
+        grafo.addVertice(v2);
+        grafo.addVertice(v3);
+        grafo.addVertice(v4);
+        grafo.addVertice(v5);
+        grafo.addVertice(v6);
+
+        // Adição das arestas não direcionadas com os pesos
+        grafo.addArestaNaoDirecionada(v0, v1, 2);
+        grafo.addArestaNaoDirecionada(v0, v2, 6);
+        grafo.addArestaNaoDirecionada(v1, v3, 5);
+        grafo.addArestaNaoDirecionada(v2, v3, 8);
+        grafo.addArestaNaoDirecionada(v3, v4, 10);
+        grafo.addArestaNaoDirecionada(v3, v5, 15);
+        grafo.addArestaNaoDirecionada(v4, v5, 6);
+        grafo.addArestaNaoDirecionada(v4, v6, 2);
+        grafo.addArestaNaoDirecionada(v5, v6, 6);
+
+
+DFS:
+    // Criação dos vértices
+    Vertice v0 = new Vertice("0");
+    Vertice v1 = new Vertice("1");
+    Vertice v2 = new Vertice("2");
+    Vertice v3 = new Vertice("3");
+    Vertice v4 = new Vertice("4");
+    Vertice v5 = new Vertice("5");
+
+    // Adição dos vértices ao grafo
+    grafo.addVertice(v0);
+    grafo.addVertice(v1);
+    grafo.addVertice(v2);
+    grafo.addVertice(v3);
+    grafo.addVertice(v4);
+    grafo.addVertice(v5);
+
+    // Adição das arestas direcionadas
+    grafo.addArestaDirecionada(v0, v1); 
+    grafo.addArestaDirecionada(v0, v4); 
+    grafo.addArestaDirecionada(v1, v2); 
+    grafo.addArestaDirecionada(v1, v4); 
+    grafo.addArestaDirecionada(v2, v3); 
+    grafo.addArestaDirecionada(v3, v1); 
+    grafo.addArestaDirecionada(v4, v3); 
+    grafo.addArestaDirecionada(v5, v0); 
+    grafo.addArestaDirecionada(v5, v4); 
+
+
+BFS:
+        Vertice v0 = new Vertice("v0");
+        Vertice v1 = new Vertice("v1");
+        Vertice v2 = new Vertice("v2");
+        Vertice v3 = new Vertice("v3");
+        Vertice v4 = new Vertice("v4");
+        Vertice v5 = new Vertice("v5");
+        Vertice v6 = new Vertice("v6");
+        Vertice v7 = new Vertice("v7");
+        Vertice v8 = new Vertice("v8");
+        Vertice v9 = new Vertice("v9");
+
+// Adiciona os vertices ao grafo
+        grafo.addVertice(v0);
+        grafo.addVertice(v1);
+        grafo.addVertice(v2);
+        grafo.addVertice(v3);
+        grafo.addVertice(v4);
+        grafo.addVertice(v5);
+        grafo.addVertice(v6);
+        grafo.addVertice(v7);
+        grafo.addVertice(v8);
+        grafo.addVertice(v9);
+
+// Cria as arestas
+        grafo.addArestaNaoDirecionada(v0, v1);
+        grafo.addArestaNaoDirecionada(v1, v2, 1);
+        grafo.addArestaNaoDirecionada(v1, v3, 1);
+        grafo.addArestaNaoDirecionada(v2, v4, 1);
+        grafo.addArestaNaoDirecionada(v2, v6, 1);
+        grafo.addArestaNaoDirecionada(v3, v4, 1);
+        grafo.addArestaDirecionada(v5, v6, 1);
+        grafo.addArestaNaoDirecionada(v5, v7, 1);
+        grafo.addArestaNaoDirecionada(v6, v7, 1);
+        grafo.addArestaNaoDirecionada(v7, v8, 1);
+        grafo.addArestaNaoDirecionada(v8, v9, 1);
+
+//
+
+
+MST:
+
+        // Criação dos vértices
+        Vertice a = new Vertice("A");
+        Vertice b = new Vertice("B");
+        Vertice c = new Vertice("C");
+        Vertice d = new Vertice("D");
+        Vertice e = new Vertice("E");
+
+        // Adiciona os vértices ao grafo
+        grafo.addVertice(a);
+        grafo.addVertice(b);
+        grafo.addVertice(c);
+        grafo.addVertice(d);
+        grafo.addVertice(e);
+
+        // Adiciona as arestas
+        grafo.addArestaNaoDirecionada(a, b, 3);
+        grafo.addArestaNaoDirecionada(a, c, 5);
+        grafo.addArestaNaoDirecionada(a, d, 8);
+        grafo.addArestaNaoDirecionada(a, e, 9);
+        grafo.addArestaNaoDirecionada(b, d, 2);
+        grafo.addArestaNaoDirecionada(c, d, 8);
+        grafo.addArestaNaoDirecionada(c, e, 2);
+        grafo.addArestaNaoDirecionada(d, e, 1);
